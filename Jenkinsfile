@@ -27,22 +27,22 @@ pipeline {
             }
     }
     
-/*    stage('Docker Image Creation') {
+    stage('Docker Image Creation') {
       steps {
-        sh 'docker build -t roshdockerhub/banking-project:1.0' .'
+        sh 'docker build -t roshdockerhub/banking-project:1.0' 
             }
     }
     stage('DockerLogin') {
       steps {
-        withCredentials([usernamePassword(credentialsId: 'Docker-Login', passwordVariable: 'docker_password', usernameVariable: 'docker_login')]) {
-        sh "docker login -u ${docker_login} -p ${docker_password}"
+        withCredentials([usernamePassword(credentialsId: 'Dockerlogin', passwordVariable: 'dockerhub-pass', usernameVariable: 'dockerhub-user')]) {
+        sh 'docker login -u ${env.dockerhub-user} -p ${env.docker-pass}'
             }
         }
     } 
   
     stage('Push Image to DockerHub') {
       steps {
-        sh 'docker push cbabu85/bankingfinance:4.0'
+        sh 'docker push roshdockerhub/banking-project:1.0'
             }
     } 
         stage ('Configure Test-server with Terraform, Ansible and then Deploying'){
